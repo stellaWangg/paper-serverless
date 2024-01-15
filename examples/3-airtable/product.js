@@ -3,7 +3,6 @@ const result = document.querySelector(".result");
 const fetchProduct = async () => {
   result.innerHTML = `<h2>Loading...</h2>`;
   try {
-    // const id = '?id=1'
     const id = window.location.search;
     // const {
     //   data: { fields },
