@@ -1,17 +1,17 @@
-const result = document.querySelector('.result')
+const result = document.querySelector(".result");
 
 const fetchProduct = async () => {
-  result.innerHTML = `<h2>Loading...</h2>`
+  result.innerHTML = `<h2>Loading...</h2>`;
   try {
     // const id = '?id=1'
-    const id = window.location.search
+    const id = window.location.search;
     // const {
     //   data: { fields },
-    // } = await axios.get(`/api/3-product${id}`)
+    // } = await axios.get(`/api/3-product${id}`)-z-complete
     const {
       data: { fields },
-    } = await axios.get(`/api/3-z-complete${id}`)
-    const { name, desc, price, image } = fields
+    } = await axios.get(`/api/3-z-complete${id}`);
+    const { name, desc, price, image } = fields;
     result.innerHTML = `<h1 class="title">${name}</h1>
   <article class="product">
     <img class="product-img"
@@ -23,10 +23,10 @@ const fetchProduct = async () => {
       <h5 class="price">$${price}</h5>
       <p class="desc">${desc}</p>
     </div>
-  </article>`
+  </article>`;
   } catch (error) {
-    result.innerHTML = `<h2>${error.response.data}</h2>`
+    result.innerHTML = `<h2>${error.response.data}</h2>`;
   }
-}
+};
 
-fetchProduct()
+fetchProduct();
