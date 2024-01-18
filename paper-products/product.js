@@ -25,6 +25,7 @@ const fetchProduct = async () => {
       <p class="desc">${desc}</p>
     </div>
   </article>`;
+    return { name, images, desc, price, category, company };
   } catch (error) {
     result.innerHTML = `<h2>${error.response.data}</h2>`;
   }
