@@ -45,13 +45,16 @@ exports.handler = async (event, context, cb) => {
         stock,
       };
 
-      return {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-        statusCode: 200,
-        body: JSON.stringify(singleProduct),
-      };
+      return (
+        null,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          statusCode: 200,
+          body: JSON.stringify(singleProduct),
+        }
+      );
     } catch (error) {
       return {
         statusCode: 500,
@@ -78,13 +81,16 @@ exports.handler = async (event, context, cb) => {
         featured,
       };
     });
-    return {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      statusCode: 200,
-      body: JSON.stringify(products),
-    };
+    return (
+      null,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        statusCode: 200,
+        body: JSON.stringify(products),
+      }
+    );
   } catch (error) {
     return {
       statusCode: 500,
