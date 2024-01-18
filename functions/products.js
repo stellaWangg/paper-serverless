@@ -16,12 +16,28 @@ exports.handler = async (event, context, cb) => {
           body: `No product with id: ${id}`,
         };
       }
+      const { name, price, images, desc, category, company, featured } =
+        product.fields;
+      const url = images[0].url;
+
+      const singleProduct = {
+        id,
+        url,
+        name,
+        images,
+        price,
+        desc,
+        category,
+        company,
+        featured,
+      };
+
       return {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
         statusCode: 200,
-        body: JSON.stringify(product),
+        body: JSON.stringify(singleProduct),
       };
     } catch (error) {
       return {
