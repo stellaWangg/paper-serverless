@@ -16,8 +16,18 @@ exports.handler = async (event, context, cb) => {
           body: `No product with id: ${id}`,
         };
       }
-      const { name, price, images, desc, category, company, featured } =
-        product.fields;
+      const {
+        name,
+        price,
+        images,
+        desc,
+        category,
+        company,
+        featured,
+        stars,
+        reviews,
+        stock,
+      } = product.fields;
       const url = images[0].url;
 
       const singleProduct = {
@@ -30,6 +40,9 @@ exports.handler = async (event, context, cb) => {
         category,
         company,
         featured,
+        stars,
+        reviews,
+        stock,
       };
 
       return {
