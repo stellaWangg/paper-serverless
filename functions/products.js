@@ -1,15 +1,17 @@
 require("dotenv").config();
-const Airtable = require("airtable-node");
+const Airtable = require("airtable");
 
-const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
-  .base("appQp4gctUn5UfYPv")
-  .table("retail");
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+  process.env.AIRTABLE_BASE_ID
+);
 
-exports.handler = async (event, context, cb) => {
+exports.handler = async (event, context) => {
   const { id } = event.queryStringParameters;
+
   if (id) {
     try {
-      const product = await airtable.retrieve(id);
+      const product = await base("retail").find(id);
+      console.log(product);
       if (product.error) {
         return {
           statusCode: 404,
@@ -45,16 +47,13 @@ exports.handler = async (event, context, cb) => {
         stock,
       };
 
-      return (
-        null,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-          statusCode: 200,
-          body: JSON.stringify(singleProduct),
-        }
-      );
+      return {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        statusCode: 200,
+        body: JSON.stringify(singleProduct),
+      };
     } catch (error) {
       return {
         statusCode: 500,
@@ -63,7 +62,7 @@ exports.handler = async (event, context, cb) => {
     }
   }
   try {
-    const { records } = await airtable.list();
+    const records = await base("retail").select().all();
     const products = records.map((product) => {
       const { id } = product;
       const { name, price, images, desc, category, company, featured } =

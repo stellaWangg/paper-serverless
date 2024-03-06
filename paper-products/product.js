@@ -4,13 +4,9 @@ const fetchProduct = async () => {
   result.innerHTML = `<h2>Loading...</h2>`;
   try {
     const id = window.location.search;
-    // const {
-    //   data: { fields },
-    // } = await axios.get(`/api/3-product${id}`)-z-complete
-    const {
-      data: { fields },
-    } = await axios.get(`/api/products${id}`);
-    const { name, images, desc, price, category, company } = fields;
+    const fields = await axios.get(`/api/products${id}`);
+
+    const { name, images, desc, price, category, company } = fields.data;
     result.innerHTML = `<h1 class="title">${name}</h1>
   <article class="product">
     <img class="product-img"
@@ -27,7 +23,7 @@ const fetchProduct = async () => {
   </article>`;
     return { name, images, desc, price, category, company };
   } catch (error) {
-    result.innerHTML = `<h2>${error.response.data}</h2>`;
+    result.innerHTML = `<h2>${error.response}</h2>`;
   }
 };
 
